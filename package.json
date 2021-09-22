@@ -1,5 +1,6 @@
 {
   "name": "@codesplanation/server",
+  "author": "liuqibasixseveneight",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +10,6 @@
     "start": "nodemon index"
   },
   "keywords": [],
-  "author": "",
   "license": "ISC",
   "dependencies": {
     "apollo-server": "^3.3.0",
