@@ -24,3 +24,8 @@ If, by chance, a reader doesn't understand some of the written and/or annotated 
   - This is used to render out the frontend
 - [**Codesplanation.Server**](https://github.com/liuqibasixseveneight/Codesplanation.Server)
   - This is used to connect and query the backend
+
+## Repository Webhooks
+
+- GitHub/Codesplanation.Client
+- GitHub/Codesplanation.Server
