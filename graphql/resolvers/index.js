@@ -8,6 +8,7 @@ module.exports = {
     likeCount: (parent) => parent.likes.length,
   },
   Query: {
+    ...usersResolvers.Query,
     ...postsResolvers.Query,
   },
   Mutation: {
