@@ -28,7 +28,7 @@ module.exports = {
   },
 
   Mutation: {
-    createPost: async (_, { subtitle, title, body }, context) => {
+    createPost: async (_, { subtitle, title, body, difficulty }, context) => {
       const user = checkAuth(context);
 
       if (title.trim() === "") {
@@ -40,11 +40,15 @@ module.exports = {
       if (body.trim() === "") {
         throw new Error("Post body must not be empty");
       }
+      if (difficulty.trim() === "") {
+        throw new Error("Post difficulty must not be empty");
+      }
 
       const newPost = new Post({
         title,
         subtitle,
         body,
+        difficulty,
         user: user.id,
         username: user.username,
         createdAt: new Date().toISOString(),

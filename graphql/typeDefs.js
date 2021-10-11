@@ -25,6 +25,7 @@ module.exports = gql`
     commentCount: Int!
     likes: [Like]!
     likeCount: Int!
+    difficulty: String!
   }
 
   type User {
@@ -52,7 +53,12 @@ module.exports = gql`
   type Mutation {
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
-    createPost(subtitle: String!, title: String!, body: String!): Post!
+    createPost(
+      subtitle: String!
+      title: String!
+      body: String!
+      difficulty: String!
+    ): Post!
     deletePost(postId: ID!): String!
     createComment(postId: ID!, body: String!): Post!
     deleteComment(postId: ID!, commentId: ID!): Post!

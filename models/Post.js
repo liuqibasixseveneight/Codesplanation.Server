@@ -23,6 +23,7 @@ const postSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users",
   },
+  difficulty: String,
 });
 
 module.exports = model("Post", postSchema);
