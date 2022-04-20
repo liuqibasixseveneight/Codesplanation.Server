@@ -3,6 +3,7 @@ const { model, Schema } = require("mongoose");
 const postSchema = new Schema({
   title: String,
   subtitle: String,
+  difficulty: String,
   body: String,
   username: String,
   createdAt: String,
@@ -23,7 +24,6 @@ const postSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "users",
   },
-  difficulty: String,
 });
 
 module.exports = model("Post", postSchema);
