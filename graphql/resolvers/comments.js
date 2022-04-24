@@ -1,16 +1,16 @@
-const { AuthenticationError, UserInputError } = require("apollo-server");
+const { AuthenticationError, UserInputError } = require('apollo-server');
 
-const Post = require("../../models/Post");
-const checkAuth = require("../../utils/checkAuth");
+const Post = require('../../models/Post');
+const checkAuth = require('../../utils/checkAuth');
 
 module.exports = {
   Mutation: {
     createComment: async (_, { postId, body }, context) => {
       const { username } = checkAuth(context);
-      if (body.trim() === "") {
-        throw new UserInputError("Comments cannot be empty", {
+      if (body.trim() === '') {
+        throw new UserInputError('Comments cannot be empty', {
           errors: {
-            body: "Comment body must not be empty",
+            body: 'Comment body must not be empty',
           },
         });
       }
@@ -26,7 +26,7 @@ module.exports = {
         await post.save();
         return post;
       } else {
-        throw new UserInputError("Post not found");
+        throw new UserInputError('Post not found');
       }
     },
     deleteComment: async (_, { postId, commentId }, context) => {
@@ -43,10 +43,10 @@ module.exports = {
           await post.save();
           return post;
         } else {
-          throw new AuthenticationError("Action not permitted");
+          throw new AuthenticationError('Action not permitted');
         }
       } else {
-        throw new UserInputError("Post not found");
+        throw new UserInputError('Post not found');
       }
     },
   },
