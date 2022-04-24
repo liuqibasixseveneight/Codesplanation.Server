@@ -1,8 +1,9 @@
-const { model, Schema } = require("mongoose");
+const { model, Schema } = require('mongoose');
 
 const postSchema = new Schema({
   title: String,
   subtitle: String,
+  difficulty: String,
   body: String,
   username: String,
   createdAt: String,
@@ -21,9 +22,8 @@ const postSchema = new Schema({
   ],
   user: {
     type: Schema.Types.ObjectId,
-    ref: "users",
+    ref: 'users',
   },
-  difficulty: String,
 });
 
-module.exports = model("Post", postSchema);
+module.exports = model('Post', postSchema);

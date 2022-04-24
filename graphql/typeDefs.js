@@ -1,4 +1,4 @@
-const { gql } = require("apollo-server");
+const { gql } = require('apollo-server');
 
 module.exports = gql`
   type Comment {
@@ -18,6 +18,7 @@ module.exports = gql`
     id: ID!
     title: String!
     subtitle: String!
+    difficulty: String!
     body: String!
     createdAt: String!
     username: String!
@@ -25,7 +26,6 @@ module.exports = gql`
     commentCount: Int!
     likes: [Like]!
     likeCount: Int!
-    difficulty: String!
   }
 
   type User {
@@ -54,10 +54,10 @@ module.exports = gql`
     register(registerInput: RegisterInput): User!
     login(username: String!, password: String!): User!
     createPost(
-      subtitle: String!
       title: String!
-      body: String!
+      subtitle: String!
       difficulty: String!
+      body: String!
     ): Post!
     deletePost(postId: ID!): String!
     createComment(postId: ID!, body: String!): Post!
