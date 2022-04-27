@@ -1,13 +1,13 @@
-const bcrypt = require("bcryptjs");
-const jwt = require("jsonwebtoken");
-const { UserInputError } = require("apollo-server");
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+const { UserInputError } = require('apollo-server');
 
 const {
   validateLoginInput,
   validateRegisterInput,
-} = require("../../utils/validators");
-const { SECRET_KEY } = require("../../config");
-const User = require("../../models/User");
+} = require('../../utils/validators');
+const { SECRET_KEY } = require('../../config');
+const User = require('../../models/User');
 
 const generateToken = (user) => {
   return jwt.sign(
@@ -17,7 +17,7 @@ const generateToken = (user) => {
       username: user.username,
     },
     SECRET_KEY,
-    { expiresIn: "1h" }
+    { expiresIn: '1h' }
   );
 };
 
@@ -37,7 +37,7 @@ module.exports = {
         if (user) {
           return user;
         } else {
-          throw new Error("User not found");
+          throw new Error('User not found');
         }
       } catch (err) {
         throw new Error(err);
@@ -50,20 +50,20 @@ module.exports = {
       const { errors, valid } = validateLoginInput(username, password);
 
       if (!valid) {
-        throw new UserInputError("Errors", { errors });
+        throw new UserInputError('Errors', { errors });
       }
 
       const user = await User.findOne({ username });
 
       if (!user) {
-        errors.general = "User not found";
-        throw new UserInputError("User not found", { errors });
+        errors.general = 'User not found';
+        throw new UserInputError('User not found', { errors });
       }
 
       const match = await bcrypt.compare(password, user.password);
       if (!match) {
-        errors.general = "Wrong credentials";
-        throw new UserInputError("Wrong credentials", { errors });
+        errors.general = 'Wrong credentials';
+        throw new UserInputError('Wrong credentials', { errors });
       }
 
       const token = generateToken(user);
@@ -86,15 +86,15 @@ module.exports = {
         confirmPassword
       );
       if (!valid) {
-        throw new UserInputError("Errors", { errors });
+        throw new UserInputError('Errors', { errors });
       }
 
       // Make sure user does not already exist
       const user = await User.findOne({ username });
       if (user) {
-        throw new UserInputError("Username is already taken", {
+        throw new UserInputError('Username is already taken', {
           errors: {
-            username: "This username is already taken",
+            username: 'This username is already taken',
           },
         });
       }

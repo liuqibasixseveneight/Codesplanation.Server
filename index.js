@@ -1,9 +1,9 @@
-const { ApolloServer } = require("apollo-server");
-const mongoose = require("mongoose");
+const { ApolloServer } = require('apollo-server');
+const mongoose = require('mongoose');
 
-const typeDefs = require("./graphql/typeDefs");
-const resolvers = require("./graphql/resolvers");
-const { MONGODB_CONNECTION_STRING } = require("./config");
+const typeDefs = require('./graphql/typeDefs');
+const resolvers = require('./graphql/resolvers');
+const { MONGODB_CONNECTION_STRING } = require('./config');
 
 const server = new ApolloServer({
   typeDefs,
@@ -14,7 +14,7 @@ const server = new ApolloServer({
 mongoose
   .connect(MONGODB_CONNECTION_STRING, { useNewUrlParser: true })
   .then(() => {
-    console.log("MongoDB Connected");
+    console.log('MongoDB Connected');
     return server.listen(process.env.PORT || 5000);
   })
   .then((res) => {

@@ -1,7 +1,7 @@
-const { AuthenticationError, UserInputError } = require("apollo-server");
+const { AuthenticationError, UserInputError } = require('apollo-server');
 
-const Post = require("../../models/Post");
-const checkAuth = require("../../utils/checkAuth");
+const Post = require('../../models/Post');
+const checkAuth = require('../../utils/checkAuth');
 
 module.exports = {
   Query: {
@@ -19,7 +19,7 @@ module.exports = {
         if (post) {
           return post;
         } else {
-          throw new Error("Post not found");
+          throw new Error('Post not found');
         }
       } catch (err) {
         throw new Error(err);
@@ -31,17 +31,17 @@ module.exports = {
     createPost: async (_, { subtitle, title, body, difficulty }, context) => {
       const user = checkAuth(context);
 
-      if (title.trim() === "") {
-        throw new Error("Post title must not be empty");
+      if (title.trim() === '') {
+        throw new Error('Post title must not be empty');
       }
-      if (subtitle.trim() === "") {
-        throw new Error("Post subtitle must not be empty");
+      if (subtitle.trim() === '') {
+        throw new Error('Post subtitle must not be empty');
       }
-      if (body.trim() === "") {
-        throw new Error("Post body must not be empty");
+      if (body.trim() === '') {
+        throw new Error('Post body must not be empty');
       }
-      if (difficulty.trim() === "") {
-        throw new Error("Post difficulty must not be empty");
+      if (difficulty.trim() === '') {
+        throw new Error('Post difficulty must not be empty');
       }
 
       const newPost = new Post({
@@ -64,9 +64,9 @@ module.exports = {
 
         if (user.username === post.username) {
           await post.delete();
-          return "Post deleted successfully";
+          return 'Post deleted successfully';
         } else {
-          throw new AuthenticationError("Action not permitted");
+          throw new AuthenticationError('Action not permitted');
         }
       } catch (err) {
         throw new Error(err);
@@ -88,7 +88,7 @@ module.exports = {
         await post.save();
         return post;
       } else {
-        throw new UserInputError("Post not found");
+        throw new UserInputError('Post not found');
       }
     },
   },
