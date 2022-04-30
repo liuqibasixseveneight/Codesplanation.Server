@@ -16,9 +16,9 @@ const server = new ApolloServer({
 mongoose
   .connect(MONGODB_CONNECTION_STRING, { useNewUrlParser: true })
   .then(() => {
-    console.log('MongoDB Connected');
+    console.log('\u001b[1;32m ✅ MongoDB Connected');
     return server.listen(process.env.PORT || 5000);
   })
   .then((res) => {
-    console.log(`Server running at: ${res.url}`);
+    console.log(`\u001b[1;32m ✅ Server running at: ${res.url}`);
   });

@@ -22,6 +22,7 @@ module.exports = gql`
     body: String!
     createdAt: String!
     username: String!
+    user: ID!
     comments: [Comment]!
     commentCount: Int!
     likes: [Like]!
@@ -46,6 +47,7 @@ module.exports = gql`
   type Query {
     getPosts: [Post]
     getPost(postId: ID!): Post
+    getPostsByUser(userId: ID!): [Post]
     getUsers: [User]
     getUser(userId: ID!): User
   }

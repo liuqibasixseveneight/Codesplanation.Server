@@ -25,6 +25,14 @@ module.exports = {
         throw new Error(err);
       }
     },
+    getPostsByUser: async (_, { userId }) => {
+      try {
+        const posts = await Post.find({ user: userId }).sort({ createdAt: -1 });
+        return posts;
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
   },
 
   Mutation: {
@@ -37,11 +45,11 @@ module.exports = {
       if (subtitle.trim() === '') {
         throw new Error('Post subtitle must not be empty');
       }
-      if (difficulty.trim() === '') {
-        throw new Error('Post difficulty must not be empty');
-      }
       if (body.trim() === '') {
         throw new Error('Post body must not be empty');
+      }
+      if (difficulty.trim() === '') {
+        throw new Error('Post difficulty must not be empty');
       }
 
       const newPost = new Post({
