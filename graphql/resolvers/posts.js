@@ -25,6 +25,14 @@ module.exports = {
         throw new Error(err);
       }
     },
+    getPostsByUser: async (_, { userId }) => {
+      try {
+        const posts = await Post.find({ user: userId }).sort({ createdAt: -1 });
+        return posts;
+      } catch (err) {
+        throw new Error(err);
+      }
+    },
   },
 
   Mutation: {
