@@ -36,7 +36,7 @@ module.exports = {
   },
 
   Mutation: {
-    createPost: async (_, { subtitle, title, body, difficulty }, context) => {
+    createPost: async (_, { title, subtitle, difficulty, body }, context) => {
       const user = checkAuth(context);
 
       if (title.trim() === '') {
@@ -55,13 +55,19 @@ module.exports = {
       const newPost = new Post({
         title,
         subtitle,
-        body,
         difficulty,
+        body,
         user: user.id,
         username: user.username,
         createdAt: new Date().toISOString(),
       });
+
       const post = await newPost.save();
+
+      context.pubsub.publish('NEW_POST', {
+        newPost: post,
+      });
+
       return post;
     },
     deletePost: async (_, { postId }, context) => {
